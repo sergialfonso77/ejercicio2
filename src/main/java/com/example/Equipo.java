@@ -1,6 +1,7 @@
 package com.example;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Equipo {
     
@@ -8,40 +9,51 @@ public class Equipo {
 
     private String name;
     private String foundationYear; 
-    private ArrayList<Miembro> miembros;
+    private List<Miembro> miembros;
 
 
     public Equipo(String name, String foundationYear) {
         this.name = name; 
         this.foundationYear = foundationYear; 
+        this.miembros = new ArrayList<>();
         numEquipos++;
     }
     
-    void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 
-    void setFoundationYear(String foundationYear) {
+    public void setFoundationYear(String foundationYear) {
         this.foundationYear = foundationYear;
     }
 
-    String getFoundationYear() {
+    public String getFoundationYear() {
         return foundationYear;
     }
 
-    void setMiembros(ArrayList<Miembro> miembros) {
+    public void setMiembros(ArrayList<Miembro> miembros) {
         this.miembros = miembros;
     }
 
-    ArrayList<Miembro> getMiembros() {
+    public List<Miembro> getMiembros() {
         return miembros;
     }
 
-    int getNumEquipos() {
+    public void addMiembro(Miembro newMiembro) throws MiembroDuplicadoException {
+        for(Miembro m : miembros) {
+            if (m.getName().equalsIgnoreCase(newMiembro.getName()) && m.getSurname().equalsIgnoreCase(m.getSurname())) {
+                throw new MiembroDuplicadoException("El miembro" + m.getName() + " " + m.getSurname() + "ya forma parte del equipo");
+            }
+        }
+        miembros.add(newMiembro);
+    }
+
+
+    public int getNumEquipos() {
         return numEquipos;
     }
     

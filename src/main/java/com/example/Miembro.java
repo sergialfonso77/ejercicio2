@@ -36,6 +36,11 @@ abstract sealed class Miembro permits Jugador, Entrenador {
     int getAge() {
         return age;
     }
+
+    public String getCompleteName() {
+        String fullName = getName() + " " + getSurname();
+        return fullName;
+    }
     
     //Metodos abstractos
     abstract void mostrarDetalles();

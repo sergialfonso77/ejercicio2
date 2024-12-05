@@ -1,18 +1,20 @@
 package com.example;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Equipo {
     
     private static int numEquipos = 0;
 
     private String name;
-    private String foundationYear; 
+    private int foundationYear; 
     private List<Miembro> miembros;
 
 
-    public Equipo(String name, String foundationYear) {
+    public Equipo(String name, int foundationYear) {
         this.name = name; 
         this.foundationYear = foundationYear; 
         this.miembros = new ArrayList<>();
@@ -27,11 +29,11 @@ public class Equipo {
         return name;
     }
 
-    public void setFoundationYear(String foundationYear) {
+    public void setFoundationYear(int foundationYear) {
         this.foundationYear = foundationYear;
     }
 
-    public String getFoundationYear() {
+    public int getFoundationYear() {
         return foundationYear;
     }
 
@@ -40,16 +42,27 @@ public class Equipo {
     }
 
     public List<Miembro> getMiembros() {
-        return miembros;
+        return miembros.stream()
+            .sorted(Comparator.comparing(Miembro::getSurname)
+            .thenComparing(Miembro::getName))
+            .collect(Collectors.toList());
     }
 
     public void addMiembro(Miembro newMiembro) throws MiembroDuplicadoException {
-        for(Miembro m : miembros) {
-            if (m.getName().equalsIgnoreCase(newMiembro.getName()) && m.getSurname().equalsIgnoreCase(m.getSurname())) {
-                throw new MiembroDuplicadoException("El miembro" + m.getName() + " " + m.getSurname() + "ya forma parte del equipo");
-            }
+        
+        if (miembros.stream().anyMatch(m -> m.getCompleteName().equalsIgnoreCase(newMiembro.getCompleteName()))) {
+            throw new MiembroDuplicadoException("El miembro" + newMiembro.getName() + " " + newMiembro.getSurname() + "ya forma parte del equipo");
         }
+
         miembros.add(newMiembro);
+    }
+
+    public Miembro findMiembro(String name, String surname) {
+        return miembros.stream()
+            .filter(m -> m.getName().equalsIgnoreCase(name) && m.getSurname().equalsIgnoreCase(surname))
+            .findFirst()
+            .orElse(null);
+        
     }
 
 

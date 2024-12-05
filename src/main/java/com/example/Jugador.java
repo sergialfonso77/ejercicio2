@@ -7,7 +7,7 @@ public final class Jugador extends Miembro {
     private static final Logger logger = Logger.getLogger(Jugador.class.getName());
     private int dorsal;
 
-    public Jugador (String name, int dorsal, int age, String surname) {
+    public Jugador (String name, String surname, int dorsal, int age) {
         super(name, surname, age);
         this.dorsal = dorsal;
         logger.info("jugador creado");

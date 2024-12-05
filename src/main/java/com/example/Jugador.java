@@ -13,16 +13,16 @@ public final class Jugador extends Miembro {
         logger.info("jugador creado");
     }
 
-    void setDorsal(int dorsal) {
+    public void setDorsal(int dorsal) {
         this.dorsal = dorsal;
     }
 
-    int getDorsal() {
+    public int getDorsal() {
         return dorsal;
     }
 
     @Override
-    void mostrarDetalles() {
+    public void mostrarDetalles() {
         String message = String.format("Jugador %s %s de %d años, con dorsal %d", getName(), getSurname(), getAge(), dorsal);
         logger.info(message);
     }

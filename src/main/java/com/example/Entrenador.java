@@ -13,16 +13,16 @@ public final class Entrenador extends Miembro {
         this.tactica = tactica;
     }
 
-    void setTactica(String tactica) {
+    public void setTactica(String tactica) {
         this.tactica = tactica;
     }
 
-    String getTactica() {
+    public String getTactica() {
         return tactica;
     }
 
     @Override
-    void mostrarDetalles() {
+    public void mostrarDetalles() {
         String message = String.format("Jugador %s %s de %d años, con tactica %s", getName(), getSurname(), getAge(), tactica);
         logger.info(message);
     }

@@ -1,5 +1,6 @@
 package com.example;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -10,11 +11,11 @@ public class Equipo {
     private static int numEquipos = 0;
 
     private String name;
-    private int foundationYear; 
+    private LocalDate foundationYear; 
     private List<Miembro> miembros;
 
 
-    public Equipo(String name, int foundationYear) {
+    public Equipo(String name, LocalDate foundationYear) {
         this.name = name; 
         this.foundationYear = foundationYear; 
         this.miembros = new ArrayList<>();
@@ -29,11 +30,11 @@ public class Equipo {
         return name;
     }
 
-    public void setFoundationYear(int foundationYear) {
+    public void setFoundationYear(LocalDate foundationYear) {
         this.foundationYear = foundationYear;
     }
 
-    public int getFoundationYear() {
+    public LocalDate getFoundationYear() {
         return foundationYear;
     }
 
